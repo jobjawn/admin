@@ -19,6 +19,12 @@ defmodule JJWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/signup", JJWeb.Signup, as: :signup do
+    pipe_through :browser
+
+    resources "/users", UserController, only: [:new, :create]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", JJWeb do
   #   pipe_through :api
