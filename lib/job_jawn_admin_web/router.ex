@@ -25,6 +25,12 @@ defmodule JJWeb.Router do
     resources "/users", UserController, only: [:new, :create]
   end
 
+  scope "/auth", JJWeb.Auth, as: :auth do
+    pipe_through :browser
+
+    resources "/users", UserController, only: [:new, :create, :delete]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", JJWeb do
   #   pipe_through :api
