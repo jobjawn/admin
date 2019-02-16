@@ -2,7 +2,7 @@ defmodule JJWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :job_jawn_admin
 
   socket "/socket", JJWeb.UserSocket,
-    websocket: true,
+    websocket: [timeout: 45_000],
     longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
