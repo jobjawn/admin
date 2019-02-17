@@ -25,6 +25,10 @@ config :job_jawn_admin, JJ.Repo,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :job_jawn_admin, JJWeb.Guardian.Tokenizer,
+  issuer: "job_jawn_admin",
+  secret_key: Map.fetch!(System.get_env(), "GUARDIAN_KEY")
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

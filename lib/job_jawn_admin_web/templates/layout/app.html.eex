@@ -12,7 +12,7 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <%= render(__MODULE__, "session_list_items.html", conn: @conn) %>
           </ul>
         </nav>
         <a href="http://phoenixframework.org/" class="phx-logo">

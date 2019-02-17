@@ -49,12 +49,15 @@ defmodule JJ.Auth do
       true ->
         {:ok, user}
       false ->
-        Bcrypt.no_user_verify()
-        {:error, :incorrect}
+        check_password(nil, nil)
     end
   end
 
-  defp check_password(_, _), do: {:error, :incorrect}
+  defp check_password(_, _) do
+    Bcrypt.no_user_verify()
+
+    {:error, :incorrect}
+  end
 
   defp fetch_user_by_username(username) do
     User

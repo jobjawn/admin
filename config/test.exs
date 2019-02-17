@@ -16,3 +16,7 @@ config :job_jawn_admin, JJ.Repo,
   database: "job_jawn_admin_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :job_jawn_admin, JJWeb.Guardian.Tokenizer,
+  issuer: "job_jawn_admin",
+  secret_key: "x"
