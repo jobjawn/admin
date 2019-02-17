@@ -75,6 +75,7 @@ defmodule JJWeb.Auth.UserControllerTest do
     test "deletes chosen user", %{conn: conn, user: user} do
       conn = delete(conn, Routes.auth_user_path(conn, :delete, user))
       assert redirected_to(conn) == Routes.auth_user_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.auth_user_path(conn, :show, user))
       end

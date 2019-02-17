@@ -1,6 +1,6 @@
 defmodule JJ.Signup.User do
   @moduledoc """
-  Currently represents admin users of the system.
+  Represents a user during the signup context.
   """
 
   use Ecto.Schema

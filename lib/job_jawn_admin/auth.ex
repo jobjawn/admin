@@ -48,6 +48,7 @@ defmodule JJ.Auth do
     |> case do
       true ->
         {:ok, user}
+
       false ->
         check_password(nil, nil)
     end
@@ -62,6 +63,6 @@ defmodule JJ.Auth do
   defp fetch_user_by_username(username) do
     User
     |> where([user], user.username == ^username)
-    |> Repo.one
+    |> Repo.one()
   end
 end

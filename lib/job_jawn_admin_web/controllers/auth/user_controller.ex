@@ -14,7 +14,6 @@ defmodule JJWeb.Auth.UserController do
       {:ok, user} ->
         conn
         |> GuardianPlug.sign_in(user)
-        |> IO.inspect()
         |> put_flash(:info, "User signed in successfully.")
         |> redirect(to: Routes.page_path(conn, :index))
 

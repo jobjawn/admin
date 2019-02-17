@@ -1,7 +1,10 @@
 defmodule JJ.Auth.User do
+  @moduledoc """
+  Represents a user during the auth context
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
-
 
   schema "users" do
     field :password, :string
