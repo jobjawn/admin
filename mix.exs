@@ -46,7 +46,7 @@ defmodule JJ.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:bcrypt_elixir, "~> 2.0"},
-      {:guardian, "~> 1.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 

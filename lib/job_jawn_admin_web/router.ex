@@ -28,10 +28,16 @@ defmodule JJWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/signup", JJWeb.Signup, as: :signup do
-    pipe_through [:browser, :guardian]
+  scope "/", JJWeb do
+    pipe_through [:browser, :guardian, :ensure_auth]
+    post("/logout", Auth.UserController, :delete)
+  end
 
-    resources "/users", UserController, only: [:new, :create]
+  scope "/curate", JJWeb.Curate, as: :curate do
+    pipe_through [:browser, :guardian, :ensure_auth]
+
+    resources "/company", CompanyController
+    resources "/jobs", JobController
   end
 
   scope "/login", JJWeb.Auth, as: :auth do
@@ -40,9 +46,10 @@ defmodule JJWeb.Router do
     resources "/users", UserController, only: [:new, :create]
   end
 
-  scope "/", JJWeb do
-    pipe_through [:browser, :guardian, :ensure_auth]
-    post("/logout", Auth.UserController, :delete)
+  scope "/signup", JJWeb.Signup, as: :signup do
+    pipe_through [:browser, :guardian]
+
+    resources "/users", UserController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.
