@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, Routes.curate_job_path(@conn, :update, @job)) %>
 
-<span><%= link "Back", to: Routes.curate_job_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.curate_company_path(@conn, :show, @job.company.slug) %></span>

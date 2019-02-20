@@ -9,6 +9,7 @@ defmodule JJ.Curate.Company do
   use Ecto.Schema
   import Ecto.Changeset
   alias JJ.Curate.CompanyData
+  alias JJ.Curate.Job
 
   schema "companies" do
     field :active, :boolean, default: true
@@ -19,6 +20,7 @@ defmodule JJ.Curate.Company do
     field :url, :string, virtual: true
 
     has_many :company_data, CompanyData
+    has_many :jobs, Job
 
     timestamps()
   end
@@ -32,6 +34,11 @@ defmodule JJ.Curate.Company do
     |> unique_constraint(:slug)
     |> put_change(:last_scan, current_time())
     |> Ecto.Changeset.put_assoc(:company_data, new_company_data(attrs))
+  end
+
+  @doc false
+  def delete_changeset(company) do
+    cast(company, %{"active" => false}, [:active])
   end
 
   defp current_time do

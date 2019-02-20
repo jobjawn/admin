@@ -1,33 +1,4 @@
-<h1>Show Job</h1>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @job.name %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @job.url %>
-  </li>
-
-  <li>
-    <strong>Found:</strong>
-    <%= @job.found %>
-  </li>
-
-  <li>
-    <strong>Active:</strong>
-    <%= @job.active %>
-  </li>
-
-  <li>
-    <strong>Employment type:</strong>
-    <%= @job.employment_type %>
-  </li>
-
-</ul>
+<h1><%= link @job.name, to: @job.url %></h1>
 
 <span><%= link "Edit", to: Routes.curate_job_path(@conn, :edit, @job) %></span>
-<span><%= link "Back", to: Routes.curate_job_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.curate_company_path(@conn, :show, @job.company.slug) %></span>

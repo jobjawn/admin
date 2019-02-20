@@ -20,6 +20,7 @@ defmodule JJ.Curate do
   """
   def list_companies do
     Company
+    |> where([c], c.active)
     |> join(:inner, [c], d in subquery(most_recent_company_data_query()), on: d.company_id == c.id)
     |> select([c, d], %{c | jobs_url: d.jobs_url, name: d.name, url: d.url})
     |> Repo.all()
@@ -46,6 +47,7 @@ defmodule JJ.Curate do
     |> order_by([c, d], desc: d.inserted_at)
     |> limit(1)
     |> select([c, d], %{c | jobs_url: d.jobs_url, name: d.name, url: d.url})
+    |> preload([:jobs])
     |> Repo.one()
   end
 
@@ -97,10 +99,14 @@ defmodule JJ.Curate do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_company_data(%CompanyData{} = company_data) do
-    Repo.delete(company_data)
+  def delete_company(%Company{} = company) do
+    company
+    |> Company.delete_changeset()
+    |> Repo.update()
   end
-
+  def delete_company(company) do
+    IO.inspect(company)
+  end
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking company_data changes.
 
@@ -153,7 +159,12 @@ defmodule JJ.Curate do
       ** (Ecto.NoResultsError)
 
   """
-  def get_job!(id), do: Repo.get!(Job, id)
+  def get_job!(id) do
+    Job
+    |> where([j], j.id == ^id)
+    |> preload([:company])
+    |> Repo.one()
+  end
 
   @doc """
   Creates a job.

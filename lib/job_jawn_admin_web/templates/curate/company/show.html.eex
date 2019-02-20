@@ -4,8 +4,34 @@
 
 <ul>
   <li><%= link "Website", to: @company.url %></li>
-  <li><%= link "Jobs", to: @company.jobs_url %></li>
+  <li><%= link "#{@company.name} Jobs Page", to: @company.jobs_url %></li>
   <li>
     <%= link "Edit", to: Routes.curate_company_path(@conn, :edit, @company.slug) %>
   </li>
 </ul>
+
+<h2>Jobs</h2>
+<span><%= link "New Job", to: Routes.curate_company_job_path(@conn, :new, @company.slug) %></span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Active</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for job <- @company.jobs do %>
+    <tr>
+      <td><%= link job.name, to: Routes.curate_job_path(@conn, :show, job) %></td>
+      <td><%= link "Official Page", to: job.url %></td>
+      <td><%= if job.active, do: "Active", else: "Inactive" %></td>
+
+      <td>
+        <%= link "Edit", to: Routes.curate_job_path(@conn, :edit, job) %>
+        <%= link "Delete", to: Routes.curate_job_path(@conn, :delete, job), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

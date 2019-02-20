@@ -36,8 +36,10 @@ defmodule JJWeb.Router do
   scope "/curate", JJWeb.Curate, as: :curate do
     pipe_through [:browser, :guardian, :ensure_auth]
 
-    resources "/company", CompanyController
-    resources "/jobs", JobController
+    resources "/company", CompanyController do
+      resources "/jobs", JobController, only: [:new, :create]
+    end
+    resources "/jobs", JobController, except: [:index, :new, :create]
   end
 
   scope "/login", JJWeb.Auth, as: :auth do

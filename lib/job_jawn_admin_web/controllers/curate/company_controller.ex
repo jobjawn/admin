@@ -58,8 +58,8 @@ defmodule JJWeb.Curate.CompanyController do
   end
 
   def delete(conn, %{"id" => id}) do
-    company_data = Curate.get_company_by_slug!(id)
-    {:ok, _company_data} = Curate.delete_company_data(company_data)
+    company = Curate.get_company_by_slug!(id)
+    {:ok, _company_data} = Curate.delete_company(company)
 
     conn
     |> put_flash(:info, "Company data deleted successfully.")

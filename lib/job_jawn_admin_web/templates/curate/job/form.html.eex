@@ -13,18 +13,6 @@
   <%= text_input f, :url %>
   <%= error_tag f, :url %>
 
-  <%= label f, :found %>
-  <%= datetime_select f, :found %>
-  <%= error_tag f, :found %>
-
-  <%= label f, :active %>
-  <%= checkbox f, :active %>
-  <%= error_tag f, :active %>
-
-  <%= label f, :employment_type %>
-  <%= text_input f, :employment_type %>
-  <%= error_tag f, :employment_type %>
-
   <div>
     <%= submit "Save" %>
   </div>

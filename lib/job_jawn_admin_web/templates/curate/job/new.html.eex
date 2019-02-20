@@ -1,5 +1,5 @@
-<h1>New Job</h1>
+<h1>New Job for <%= @company.name %></h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.curate_job_path(@conn, :create)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.curate_company_job_path(@conn, :create, @company.slug)) %>
 
-<span><%= link "Back", to: Routes.curate_job_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.curate_company_path(@conn, :show, @company.slug) %></span>
